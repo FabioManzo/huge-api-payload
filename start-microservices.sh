@@ -1,5 +1,14 @@
 ## Start Docker
-# symfony-backend 
+
+# the network that will let the containers communicate with each other
+if ! docker network ls | grep -q "fabiomanzo_network"; then
+    echo "Creating Docker network fabiomanzo_network..."
+    docker network create fabiomanzo_network &
+else
+    echo "Docker network fabiomanzo_network already exists."
+fi
+
+# symfony-backend
 echo "Starting docker compose symfony-backend..."
 (cd symfony-backend && docker compose build && docker compose up -d) &
 
@@ -10,14 +19,5 @@ echo "Starting docker compose node_bot..."
 # node_S3_simulator 
 echo "Starting docker compose node_S3_simulator..."
 (cd node_S3_simulator && docker compose build && docker compose up -d) &
-
-# the network that will let the containers communicate with each other
-if ! docker network ls | grep -q "fabiomanzo_network"; then
-    echo "Creating Docker network fabiomanzo_network..."
-    docker network create fabiomanzo_network &
-else
-    echo "Docker network fabiomanzo_network already exists."
-fi
-
 
 wait

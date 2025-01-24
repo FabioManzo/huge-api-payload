@@ -3,8 +3,7 @@ services:
     build: .
     volumes:
       - .:/app
-    #command: ["npm", "start"]
-    command: ["sh", "-c", "node index.js && tail -f /dev/null"]
+    command: ["sh", "-c", "npm install && tail -f /dev/null"]
     ports:
       - 3000:3000
     environment:

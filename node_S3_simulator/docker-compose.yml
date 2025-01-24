@@ -3,6 +3,7 @@ services:
     build: .
     volumes:
       - .:/app
+    command: ["sh", "-c", "npm install && tail -f /dev/null"]
     ports:
       - 3001:4000
     environment:

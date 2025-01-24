@@ -14,10 +14,11 @@ There are 3 different projects:
 - Returns the URL of the saved json file
 
 ### Symfony Backend
-- Acts as the API Gateway that has a limit of 10MB
-- Exposes an API that receives a payload in which there is the link of the Payload to download
-- Downloads the payload from the *Node S3 simulator*
-- Loads the Flyers in its database
+- Acts as the API Gateway
+- Exposes an API to save the url of the huge payload to download
+- It has a command that:
+  - download in stream the payload from the *Node S3 simulator*
+  - loads the Flyers in its database, in chunks
 
 ## Instructions to start the microservices with the ssh script
 From the root of the project:

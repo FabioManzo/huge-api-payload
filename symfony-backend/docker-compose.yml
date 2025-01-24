@@ -37,6 +37,7 @@ services:
       DB_PASSWD: password
     networks:
       - fabiomanzo_network
+    command: ["sh", "-c", "composer install && tail -f /dev/null"]
 
 networks:
   fabiomanzo_network:
