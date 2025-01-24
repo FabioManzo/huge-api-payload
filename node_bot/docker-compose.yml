@@ -1,0 +1,17 @@
+services:
+  node_bot:
+    build: .
+    volumes:
+      - .:/app
+    #command: ["npm", "start"]
+    command: ["sh", "-c", "node index.js && tail -f /dev/null"]
+    ports:
+      - 3000:3000
+    environment:
+      - NODE_ENV=development
+    networks:
+      - fabiomanzo_network
+
+networks:
+  fabiomanzo_network:
+    external: true

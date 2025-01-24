@@ -1,0 +1,15 @@
+services:
+  node_backend:
+    build: .
+    volumes:
+      - .:/app
+    ports:
+      - 3001:4000
+    environment:
+      - NODE_ENV=development
+    networks:
+      - fabiomanzo_network
+
+networks:
+  fabiomanzo_network:
+    external: true

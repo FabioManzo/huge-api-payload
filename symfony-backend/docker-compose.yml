@@ -1,0 +1,46 @@
+services:
+  mysql8_symfony:
+    image: mysql:8.0.23
+    command: --default-authentication-plugin=mysql_native_password
+    container_name: mysql8_symfony
+    environment:
+      MYSQL_ROOT_PASSWORD: your_mysql_root_password
+      MYSQL_DATABASE: symfony_backend
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+    ports:
+      - "3301:3306"
+    volumes:
+      - ./Docker/docker.cnf:/etc/mysql/conf.d/docker.cnf
+      - ./database:/var/lib/mysql
+    depends_on:
+      - php8_symfony
+    networks:
+      - fabiomanzo_network
+
+  php8_symfony:
+    container_name: php8_symfony
+    build:
+      context: .
+      dockerfile: Docker/Dockerfile-php
+      args:
+        USER_ID: 1000
+        GROUP_ID: 1000
+    ports:
+      - "8090:80"
+    volumes:
+      - ./:/var/www/html/
+    environment:
+      DB_SERVER: mysql8_symfony
+      DB_NAME: symfony_backend
+      DB_USER: user
+      DB_PASSWD: password
+    networks:
+      - fabiomanzo_network
+
+networks:
+  fabiomanzo_network:
+    external: true
+
+volumes:
+  database:
