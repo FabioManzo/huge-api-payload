@@ -25,7 +25,27 @@ From the root of the project:
 
 `./start-microservices.sh`
 
-Enter the _node_bot_ project with:
+Enter the _symfony-backend_ project with:
+
+`cd symfony-backend`
+
+`docker-compose exec php8_symfony bash` to enter the container of the _symfony-backend_
+
+`composer install` from inside the container of the _symfony-backend_
+
+`bin/console doctrine:migrations:migrate` from inside the container of the _symfony-backend_, to create the tables
+
+`exit` to exit the container
+
+Enter the _node_S3_simulator_ project with:
+
+`cd ../node_S3_simulator`
+
+`docker-compose exec node_backend bash` to enter the container of the _node_S3_simulator_
+
+`npm start` from inside the container of the node_bot
+
+Open another terminal and enter the _node_bot_ project with:
 
 `cd node_bot`
 
@@ -48,6 +68,8 @@ To import the flyers in the database, enter the _symfony-backend_ project with:
 `bin/console app:import-payload` to start the command that imports in bulks the flyers (in production this would be a scheduled cron task)
 
 Check the flyer table to see the imported flyers.
+
+Run several times, until it imports all the flyers in the flyer table and then passes to the next payload.
 
 
 ## Instructions to start the microservices without the ssh script
