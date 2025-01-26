@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo 'Error: no test specified' && exit 1",
-    "start": "node index.js"
+    "start": "node src/index.ts"
   },
   "author": "Fabio Manzo",
   "license": "ISC",
@@ -16,5 +16,9 @@
     "lorem-ipsum": "^2.0.8",
     "path": "^0.12.7",
     "uuid": "^11.0.5"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.10",
+    "typescript": "^5.7.3"
   }
 }

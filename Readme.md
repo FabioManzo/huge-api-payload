@@ -54,7 +54,9 @@ Open another terminal and enter the _node_bot_ project with:
 
 `docker-compose exec node_bot bash` to enter the container of the _node_bot_
 
-`npm start` from inside the container of the node_bot
+`npx tsc` from inside the container of the node_bot, to compila ts into js
+
+`node dist/index.js` to start the main script
 
 Run it several times and you will see two things: 
 
