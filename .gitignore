@@ -5,5 +5,6 @@
 symfony-backend/vendor
 symfony-backend/database
 node_bot/node_modules
+node_bot/dist
 node_S3_simulator/node_modules
 node_S3_simulator/uploads/*.json
