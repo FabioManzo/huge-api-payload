@@ -6,8 +6,8 @@ import {config} from "dotenv";
 config();
 
 export function generatePayload():RequestRoot {
-  const numberOfFlyersMin = process.env.NUMBER_OF_FLYERS_GENERATED_MIN;
-  const numberOfFlyersMax = process.env.NUMBER_OF_FLYERS_GENERATED_MIN;
+  const numberOfFlyersMin:number = typeof process.env.NUMBER_OF_FLYERS_GENERATED_MIN !== "undefined" ? parseInt(process.env.NUMBER_OF_FLYERS_GENERATED_MIN) : 6;
+  const numberOfFlyersMax:number = typeof process.env.NUMBER_OF_FLYERS_GENERATED_MAX !== "undefined" ? parseInt(process.env.NUMBER_OF_FLYERS_GENERATED_MAX) : 10;
   const flyers:FlyerWrapper[] = callRandomTimes(numberOfFlyersMin, numberOfFlyersMax, getFlyer);
   return {
       "CrawlerRequest": {
@@ -23,7 +23,7 @@ export function generatePayload():RequestRoot {
 
 const callRandomTimes = <T>(min: number, max: number, fn: (arg: number) => T): T[] => {
   const numCalls:number = Math.floor(Math.random() * (max - min + 1)) + min;
-  console.info(`Generated payload with ${numCalls} random flyers. Min: ${min} and Max: ${max}. Set higher number to generate a larger payload`);
+  console.info(`Generated payload with ${numCalls} random flyers (Min: ${min} and Max: ${max}. Set higher number to generate a larger payload)`);
   let results: T[] = [];
   for (let i:number = 0; i < numCalls; i++) {
     results.push(fn(i + 1));
