@@ -100,7 +100,7 @@ class ImportPayloadCommand extends Command
             $this->flyerRepository->save($flyer);
             $insertedCount++;
             $io->info("Flyer inserted: {$flyerArr['Flyer']['id']}");
-            if ($insertedCount >= $maxChunkSize) {
+            if ($insertedCount >= $maxChunkSize || $index + 1 === count($file['CrawlerRequest']['data']['flyers'])) {
                 $io->info("I set Latest inserted: {$flyerArr['Flyer']['id']}");
                 $payload->setLatestInserted($flyerArr['Flyer']['id']);
                 $this->payloadRepository->save($payload);
