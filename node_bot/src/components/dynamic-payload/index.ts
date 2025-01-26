@@ -2,10 +2,13 @@ import { LoremIpsum } from "lorem-ipsum";
 import { v4 as uuidv4 } from 'uuid';
 import {getRandomDomain} from './domains';
 import {RequestRoot, FlyerWrapper} from './types';
+import {config} from "dotenv";
+config();
 
 export function generatePayload():RequestRoot {
-  // const flyers = callRandomTimes(19000, 22000, getFlyer); // To generate payloads of around 10MB
-  const flyers:FlyerWrapper[] = callRandomTimes(8, 12, getFlyer);
+  const numberOfFlyersMin = process.env.NUMBER_OF_FLYERS_GENERATED_MIN;
+  const numberOfFlyersMax = process.env.NUMBER_OF_FLYERS_GENERATED_MIN;
+  const flyers:FlyerWrapper[] = callRandomTimes(numberOfFlyersMin, numberOfFlyersMax, getFlyer);
   return {
       "CrawlerRequest": {
         "retailer_id": "3249",
@@ -20,7 +23,7 @@ export function generatePayload():RequestRoot {
 
 const callRandomTimes = <T>(min: number, max: number, fn: (arg: number) => T): T[] => {
   const numCalls:number = Math.floor(Math.random() * (max - min + 1)) + min;
-  console.log(`Generated ${numCalls} random flyers`);
+  console.info(`Generated payload with ${numCalls} random flyers. Min: ${min} and Max: ${max}. Set higher number to generate a larger payload`);
   let results: T[] = [];
   for (let i:number = 0; i < numCalls; i++) {
     results.push(fn(i + 1));

@@ -114,7 +114,8 @@ class ImportPayloadCommand extends Command
             $this->payloadRepository->save($payload);
         }
 
-        $io->success("$insertedCount Flyers imported successfully from payload: {$payload->getId()}");
+        $resultMessage = "$insertedCount Flyers imported from payload with id: {$payload->getId()}";
+        $insertedCount === 0 ? $io->warning($resultMessage) : $io->success($resultMessage);
 
         return Command::SUCCESS;
     }

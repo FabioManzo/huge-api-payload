@@ -16,7 +16,7 @@ const nodeS3Simulator = process.env.NODE_S3_SIMULATOR;
 const symfonyBackend = process.env.SYMFONY_BACKEND;
 const s3SimulatorApiEndpoint:string = `${nodeS3Simulator}/payload-upload`;
 const symfonyBackendApiEndpoint:string = `${symfonyBackend}/api/crawler-request`;
-console.log(s3SimulatorApiEndpoint);
+
 // Function to send the payload to the API
 async function sendPayload<T>(payload: T, apiEndpoint: string): Promise<AxiosResponse<any> | void> {
   try {
@@ -37,7 +37,7 @@ async function sendPayload<T>(payload: T, apiEndpoint: string): Promise<AxiosRes
 async function main():Promise<void> {
   console.log('Starting the bot...');
   const payload:RequestRoot = generatePayload();
-  console.log('Payload loaded successfully. Sending to node_S3_simulator API...');
+  console.log('Sending to node_S3_simulator API...');
   const s3response = await sendPayload(payload, s3SimulatorApiEndpoint);
 
   if (typeof s3response === 'undefined') {
