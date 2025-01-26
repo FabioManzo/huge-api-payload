@@ -79,7 +79,9 @@ Check the flyer table to see the imported flyers.
 Run several times, until it imports all the flyers in the flyer table and then passes to the next payload.
 
 ## Additional info
-To simplify and speed up the process, the generated payloads have only few Flyers. Increase the number of Flyers generated in the node_bot/.env file
+To simplify and speed up the process, the generated payloads have only few Flyers. 
+  - Increase the number of Flyers generated in the node_bot/.env file
+  - Increase the chunkSize in symfony-backend/.env
 
 To start again the build and configuration from zero, run:
 
