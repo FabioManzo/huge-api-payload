@@ -21,6 +21,7 @@ class ImportPayloadCommand extends Command
 {
     public function __construct(
         private string $uploadDirectory,
+        private int $chunkSize,
         private PayloadRepository $payloadRepository,
         private FlyerRepository $flyerRepository,
         private FileDownloaderInterface $fileDownloaderStream
@@ -73,7 +74,6 @@ class ImportPayloadCommand extends Command
         }
 
         $latestInserted = $payload->getLatestInserted();
-        $maxChunkSize = 3;
         $insertedCount = 0;
         $found = false;
         $io->info("LatestInserted: $latestInserted");
@@ -100,7 +100,7 @@ class ImportPayloadCommand extends Command
             $this->flyerRepository->save($flyer);
             $insertedCount++;
             $io->info("Flyer inserted: {$flyerArr['Flyer']['id']}");
-            if ($insertedCount >= $maxChunkSize || $index + 1 === count($file['CrawlerRequest']['data']['flyers'])) {
+            if ($insertedCount >= $this->chunkSize || $index + 1 === count($file['CrawlerRequest']['data']['flyers'])) {
                 $io->info("I set Latest inserted: {$flyerArr['Flyer']['id']}");
                 $payload->setLatestInserted($flyerArr['Flyer']['id']);
                 $this->payloadRepository->save($payload);
