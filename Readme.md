@@ -81,3 +81,6 @@ Run several times, until it imports all the flyers in the flyer table and then p
 ## Additional info
 To simplify and speed up the process, the generated payloads have only few Flyers. Increase the number of Flyers generated in the node_bot/.env file
 
+To start again the build and configuration from zero, run:
+
+`./cleanup.sh` from the root (it deletes all the generated files and the Symfony DB stored in a local volume)
